@@ -22,7 +22,7 @@ trait BaseNewType {
   @inline implicit def cannotUnwrapArrayAmbiguous2: Coercible[Array[Type], Array[Repr]] = Coercible.instance
 }
 
-object BaseNewType {
+trait BaseNewType$Types {
   /** `Type` implementation for all newtypes; see `BaseNewType`. */
   type Aux[B, T, R] <: B with Meta[T, R]
   trait Meta[T, R]
@@ -36,3 +36,5 @@ object BaseNewType {
   @inline implicit def classTag[B, T, R](implicit base: ClassTag[B]): ClassTag[Aux[B, T, R]] =
     ClassTag(base.runtimeClass)
 }
+
+object BaseNewType extends BaseNewType$Types
